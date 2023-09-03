@@ -12,7 +12,7 @@ export const Container = styled.div`
 `
 
 export const Body = styled.div`
-    flex: 3;
+    flex: 1;
     padding: 0 20px;
 `
 
@@ -101,7 +101,7 @@ export const Task = styled.div<TaskProps>`
 `
 
 export const Footer = styled.footer`
-    flex: 1;
+    flex: none;
     background-color: #fff;
     padding: 30px 20px 10px 20px;
     // margin-top: 30px;

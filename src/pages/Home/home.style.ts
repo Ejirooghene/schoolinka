@@ -1,4 +1,11 @@
 import styled from 'styled-components';
+import React from 'react';
+
+// Define the prop types for your styled component
+interface TaskProps extends React.HTMLAttributes<HTMLDivElement> {
+  completed: boolean;
+  focused: boolean;
+}
 
 export const Container = styled.div`
     height: 100vh;
@@ -38,7 +45,7 @@ export const Tasks = styled.section`
         margin: 20px 0 0 0;
     }
 `
-export const Task = styled.div` 
+export const Task = styled.div<TaskProps>` 
     height: 72px;
     padding: 16px 24px;
     display: flex;

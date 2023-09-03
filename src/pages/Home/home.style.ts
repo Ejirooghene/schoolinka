@@ -9,11 +9,14 @@ export const Container = styled.div`
     height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
 `
 
 export const Body = styled.div`
     flex: 1;
     padding: 0 20px;
+    display: flex;
+    flex-direction: column;
 `
 
 export const Greeting = styled.p`
@@ -38,7 +41,7 @@ export const SubText = styled.p`
 export const Tasks = styled.section`
 
     & > div {
-        height: 200px;
+        flex: 1;
         padding-bottom: 30px;
         overflow-y: scroll;
 
@@ -54,7 +57,7 @@ export const Tasks = styled.section`
         font-style: normal;
         font-weight: 600;
         line-height: 32px;
-        margin: 20px 0 20px 0;
+        // margin: 20px 0 20px 0;
     }
 `
 export const Task = styled.div<TaskProps>` 

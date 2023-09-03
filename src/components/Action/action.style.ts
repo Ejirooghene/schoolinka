@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const Modal = styled.div`
     width: 100%;
-    minHeight: 50vh;
+    min-height: 50vh;
     background-color: #FFF;
     padding: 20px;
     border-radius: 30px  30px 0 0;

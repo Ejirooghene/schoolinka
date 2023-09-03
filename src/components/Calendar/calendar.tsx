@@ -1,19 +1,21 @@
 import React, { FC } from 'react';
 import { Container, Date } from './calender.style';
+import { getMonthAndYear, getCurrentDay, getDatesAndDaysOfWeekInCurrentMonth } from '../../utils/date';
 
 const Calendar = () => {
+    const days = getDatesAndDaysOfWeekInCurrentMonth();
     return (
         <Container>
-            <h2>January 2023</h2>
+            <h2>{getMonthAndYear()}</h2>
             <div>
-                <Date>
-                    <p>Mon</p>
-                    <p>1</p>
-                </Date>
-                <Date>
-                    <p>Tue</p>
-                    <p>2</p>
-                </Date>
+                {
+                    days.map((day: any) => (
+                        <Date current={getCurrentDay() === day.date}>
+                            <p>{day.dayOfWeek}</p>
+                            <p>{day.date}</p>
+                        </Date> 
+                    ))
+                }
             </div>
         </Container>
     )

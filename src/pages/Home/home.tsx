@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Container, Body, Greeting, SubText, Tasks, Task, Footer, Input } from './home.style';
 import { Header, Calendar, Modal } from '../../components';
+import { getGreeting } from '../../utils/greeting';
 
 type ITask = {
     task: string;
@@ -31,6 +32,12 @@ const Home: FC = () => {
         },
         {
             task: 'Vercel deployment',
+            start: '10:30am',
+            end: '11:30am',
+            completed: false,
+        },
+        {
+            task: 'Vercel download',
             start: '10:30am',
             end: '11:30am',
             completed: false,
@@ -66,7 +73,7 @@ const Home: FC = () => {
             <Modal visible={showEditTask} title='Edit Task' btnTxt1='Cancel' edit={false} btnTxt2='Save'  action={() => setShowEditTask(false)} />
             <Header />
             <Body>
-                <Greeting>Good morning!</Greeting>
+                <Greeting>{getGreeting()}</Greeting>
                 <SubText>You got some task to do.</SubText>
                 <Calendar />
                 <Tasks>

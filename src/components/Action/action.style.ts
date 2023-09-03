@@ -9,6 +9,7 @@ export const Modal = styled.div`
     border-radius: 30px  30px 0 0;
     position: absolute; 
     bottom: 0;
+    z-index: 2;
 `
 
 export const TextInput = styled.textarea`
@@ -50,7 +51,7 @@ export const DateTime = styled.div`
 
     div {
         display: flex;
-        padding: 10px 16px;
+        padding: 10px 26px;
         justify-content: center;
         align-items: center;
         gap: 8px;

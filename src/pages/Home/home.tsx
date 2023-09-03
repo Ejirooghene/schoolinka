@@ -71,20 +71,22 @@ const Home: FC = () => {
                 <Calendar />
                 <Tasks>
                     <h2>My Tasks</h2>
-                    {
-                        tasks.map((task: ITask, index) => (
-                            <Task completed={task.completed} focused={index === focused} onClick={() => handleFocus(index)} onDoubleClick={() => setShowDeleteTask(true)} key={task.task}>
-                                <div>
-                                    <img src={`svgs/${task.completed ? 'check' : 'uncheck'}.svg`} width='20px' height='20px' onClick={() => toggleCheck(index)} />
+                    <div>
+                        {
+                            tasks.map((task: ITask, index) => (
+                                <Task completed={task.completed} focused={index === focused} onClick={() => handleFocus(index)} onDoubleClick={() => setShowDeleteTask(true)} key={task.task}>
                                     <div>
-                                        <h4>{task.task}</h4>
-                                        <p>{task.start} - {task.end}</p>
+                                        <img src={`svgs/${task.completed ? 'check' : 'uncheck'}.svg`} width='20px' height='20px' onClick={() => toggleCheck(index)} />
+                                        <div>
+                                            <h4>{task.task}</h4>
+                                            <p>{task.start} - {task.end}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <p>Today</p>
-                            </Task>
-                        ))
-                    }
+                                    <p>Today</p>
+                                </Task>
+                            ))
+                        }
+                    </div>
                 </Tasks>
             </Body>
             <Footer>

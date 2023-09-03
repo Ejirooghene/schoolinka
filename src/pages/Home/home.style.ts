@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import React from 'react';
 
-interface TaskProps extends React.HTMLAttributes<HTMLDivElement> {
+interface TaskProps {
   completed: boolean;
   focused: boolean;
 }
@@ -11,9 +10,7 @@ export const Container = styled.div`
 `
 
 export const Body = styled.div`
-    flex: 1;
     padding: 0 20px;
-    margin-bottom: 450px;
 `
 
 export const Greeting = styled.p`
@@ -36,6 +33,17 @@ export const SubText = styled.p`
 `
 
 export const Tasks = styled.section`
+
+    & > div {
+        height: 200px;
+        padding-bottom: 30px;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: 0.1rem;
+        }
+    }
+
     h2 {
         color: #101828;
         font-family: Inter;
@@ -43,7 +51,7 @@ export const Tasks = styled.section`
         font-style: normal;
         font-weight: 600;
         line-height: 32px;
-        margin: 20px 0 0 0;
+        margin: 20px 0 20px 0;
     }
 `
 export const Task = styled.div<TaskProps>` 
@@ -90,12 +98,9 @@ export const Task = styled.div<TaskProps>`
 `
 
 export const Footer = styled.footer`
-    width: 100%;
     background-color: #fff;
     padding: 30px 20px 10px 20px;
-    margin-top: 30px;
-    position: fixed;
-    bottom: 0;
+    // margin-top: 30px;
 `
 
 export const Input = styled.div`

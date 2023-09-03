@@ -14,6 +14,7 @@ export const Container = styled.div`
 export const Body = styled.div`
     flex: 1;
     padding: 0 20px;
+    margin-bottom: 450px;
 `
 
 export const Greeting = styled.p`
@@ -89,8 +90,12 @@ export const Task = styled.div<TaskProps>`
 `
 
 export const Footer = styled.footer`
-    padding: 0 20px;
-    margin-top: 30px
+    width: 100%;
+    background-color: #fff;
+    padding: 30px 20px 10px 20px;
+    margin-top: 30px;
+    position: fixed;
+    bottom: 0;
 `
 
 export const Input = styled.div`

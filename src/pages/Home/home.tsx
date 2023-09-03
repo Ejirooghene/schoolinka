@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { Container, Body, Greeting, SubText, Tasks, Task, Footer, Input } from './home.style';
-import { Header, Calendar } from '../../components';
+import { Header, Calendar, AddTask } from '../../components';
 
 type ITask = {
     task: string;
@@ -15,17 +15,30 @@ const Home: FC = () => {
             task: 'Create Wireframe',
             start: '10:30am',
             end: '11:30am',
-            completed: true,
+            completed: false,
         },
         {
             task: 'Go shopping',
             start: '10:30am',
             end: '11:30am',
-            completed: true,
+            completed: false,
+        },
+        {
+            task: 'Coding challenge',
+            start: '10:30am',
+            end: '11:30am',
+            completed: false,
+        },
+        {
+            task: 'Vercel deployment',
+            start: '10:30am',
+            end: '11:30am',
+            completed: false,
         },
 
     ])
     const [focused, setFocused] = useState<number>(0);
+    const [showAddTask, setShowAddTask] = useState<boolean>(false);
 
     const toggleCheck = (index: number) => {
         setTasks((prevState) => {
@@ -46,6 +59,7 @@ const Home: FC = () => {
 
     return (
         <Container>
+            { showAddTask && <AddTask addTask={() => setShowAddTask(false)} /> }
             <Header />
             <Body>
                 <Greeting>Good morning!</Greeting>
@@ -70,7 +84,7 @@ const Home: FC = () => {
                 </Tasks>
             </Body>
             <Footer>
-                <Input>
+                <Input onClick={() => setShowAddTask(true)}>
                     <p>Input task</p>
                     <img src='svgs/mic.svg' width='20px' height='20px' />
                 </Input>

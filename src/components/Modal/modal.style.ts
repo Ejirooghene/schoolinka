@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-import React from 'react';
 
-interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ContainerProps   {
   visible: boolean;
 }
 
-export const Container = styled.div`
+export const Container = styled.div<ContainerProps>`
     display: ${(prop) => prop.visible ? 'block' : 'none'};
     height: 100% ;
     background-color: rgba(0,0,0,0.5);

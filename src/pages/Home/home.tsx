@@ -61,9 +61,9 @@ const Home: FC = () => {
 
     return (
         <Container>
-            <Modal visible={showAddTask} title='Add Task' btnTxt1='Cancel' btnTxt2='Add' action={() => setShowAddTask(false)} />
+            <Modal visible={showAddTask} title='Add Task' btnTxt1='Cancel' btnTxt2='Add' edit={false} action={() => setShowAddTask(false)} />
             <Modal visible={showDeleteTask} title='' btnTxt1='Delete' btnTxt2='Edit' edit={true} action={() => setShowDeleteTask(false)} />
-            <Modal visible={showEditTask} title='Edit Task' btnTxt1='Cancel' btnTxt2='Save'  action={() => setShowEditTask(false)} />
+            <Modal visible={showEditTask} title='Edit Task' btnTxt1='Cancel' edit={false} btnTxt2='Save'  action={() => setShowEditTask(false)} />
             <Header />
             <Body>
                 <Greeting>Good morning!</Greeting>

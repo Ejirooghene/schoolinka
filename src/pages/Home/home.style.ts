@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
 
-// Define the prop types for your styled component
 interface TaskProps extends React.HTMLAttributes<HTMLDivElement> {
   completed: boolean;
   focused: boolean;
@@ -33,6 +32,7 @@ export const SubText = styled.p`
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
+    line-height: 24px;
 `
 
 export const Tasks = styled.section`

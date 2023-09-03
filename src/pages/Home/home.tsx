@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { Container, Body, Greeting, SubText, Tasks, Task, Footer, Input } from './home.style';
-import { Header, Calendar, AddTask } from '../../components';
+import { Header, Calendar, Modal } from '../../components';
 
 type ITask = {
     task: string;
@@ -39,6 +39,8 @@ const Home: FC = () => {
     ])
     const [focused, setFocused] = useState<number>(0);
     const [showAddTask, setShowAddTask] = useState<boolean>(false);
+    const [showDeleteTask, setShowDeleteTask] = useState<boolean>(false);
+    const [showEditTask, setShowEditTask] = useState<boolean>(false);
 
     const toggleCheck = (index: number) => {
         setTasks((prevState) => {
@@ -59,7 +61,9 @@ const Home: FC = () => {
 
     return (
         <Container>
-            { showAddTask && <AddTask addTask={() => setShowAddTask(false)} /> }
+            <Modal visible={showAddTask} title='Add Task' btnTxt1='Cancel' btnTxt2='Add' action={() => setShowAddTask(false)} />
+            <Modal visible={showDeleteTask} title='' btnTxt1='Delete' btnTxt2='Edit' edit={true} action={() => setShowDeleteTask(false)} />
+            <Modal visible={showEditTask} title='Edit Task' btnTxt1='Cancel' btnTxt2='Save'  action={() => setShowEditTask(false)} />
             <Header />
             <Body>
                 <Greeting>Good morning!</Greeting>
@@ -69,7 +73,7 @@ const Home: FC = () => {
                     <h2>My Tasks</h2>
                     {
                         tasks.map((task: ITask, index) => (
-                            <Task completed={task.completed} focused={index === focused} onClick={() => handleFocus(index)} key={task.task}>
+                            <Task completed={task.completed} focused={index === focused} onClick={() => handleFocus(index)} onDoubleClick={() => setShowDeleteTask(true)} key={task.task}>
                                 <div>
                                     <img src={`svgs/${task.completed ? 'check' : 'uncheck'}.svg`} width='20px' height='20px' onClick={() => toggleCheck(index)} />
                                     <div>

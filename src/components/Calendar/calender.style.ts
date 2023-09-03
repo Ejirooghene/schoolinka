@@ -26,7 +26,7 @@ export const Date = styled.div`
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
-    padding: 7.963px 12.741px;
+    padding: 7.963px 26px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -39,7 +39,7 @@ export const Date = styled.div`
     &:nth-child(2){
         display: flex;
         width: 49.37px;
-        padding: 7.963px 12.741px;
+        padding: 7.963px 26px;
         flex-direction: column;
         justify-content: center;
         align-items: center;

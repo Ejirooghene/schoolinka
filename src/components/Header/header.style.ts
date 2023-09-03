@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.header`
-    height: 70px;
+    flex: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;

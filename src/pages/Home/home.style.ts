@@ -7,9 +7,12 @@ interface TaskProps {
 
 export const Container = styled.div`
     height: 100vh;
+    display: flex;
+    flex-direction: column;
 `
 
 export const Body = styled.div`
+    flex: 3;
     padding: 0 20px;
 `
 
@@ -98,6 +101,7 @@ export const Task = styled.div<TaskProps>`
 `
 
 export const Footer = styled.footer`
+    flex: 1;
     background-color: #fff;
     padding: 30px 20px 10px 20px;
     // margin-top: 30px;

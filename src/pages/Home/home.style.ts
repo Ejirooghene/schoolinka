@@ -91,6 +91,9 @@ export const Task = styled.div<TaskProps>`
         font-style: normal;
         font-weight: 600;
         line-height: 20px;
+        transition: transform 0.1s ease;
+        transform: ${(prop) => prop.focused ? 'scaleY(1.1)' : 'scaleY(1)'};
+        transform-origin: left bottom;
     }
 
     p {

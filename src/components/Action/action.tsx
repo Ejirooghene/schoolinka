@@ -1,20 +1,41 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Modal, TextInput, Reminder, DateTime, Task, Date, Time } from './action.style';
 import ModalHeader from '../ModalHeader/modalHeader';
 import BtnGroup from '../BtnGroup/btnGroup';
+import { useAction } from '../../hooks/useAction';
+
 
 type ActionProps = {
     title: string;
     btnTxt1: string;
     btnTxt2: string;
     edit: boolean;
-    action: () => void;
+    action: string;
+    close: () => void;
 }
 
-const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit = false, action }) => {
+type ITask = {
+    task: string;
+    start: string;
+    end: string;
+    completed: boolean;
+}
+
+const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit, action, close }) => {
+    const [value, setValue] = useState<string>('')
+    const addTask = useAction();
+
+    const handleAction = (action: string) => {
+        switch(action) {
+            case 'addTask':
+                addTask(value);
+                return;
+        }
+    }
+
     return (
         <Modal>
-            <ModalHeader title={title} close={action} />
+            <ModalHeader title={title} close={close} />
             {
                 edit ? 
                 <>
@@ -30,7 +51,11 @@ const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit = false, action
                 </>
                 :
                 <>
-                    <TextInput />
+                    <TextInput
+                    value={value}
+                    onChange={e => setValue(e.target.value)}
+                    rows='5'
+                    />
                     <DateTime>
                         <div>
                             <img src='svgs/calendar.svg' width='20px' height='20px' />
@@ -54,7 +79,7 @@ const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit = false, action
                     </Reminder>
                 </>
             }
-            <BtnGroup first={btnTxt1} last={btnTxt2} />
+            <BtnGroup first={btnTxt1} last={btnTxt2} handleAction={handleAction} />
         </Modal>    
     )
 }

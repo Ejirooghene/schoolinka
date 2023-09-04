@@ -17,6 +17,12 @@ export const TextInput = styled.textarea`
     border-radius: 8px;
     background: #F9FAFB;
     border: 1px solid #D0D5DD;
+    color: #667085;
+    font-family: Work Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
     padding: 20px;
     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
     resize: none;

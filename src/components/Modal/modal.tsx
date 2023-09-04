@@ -8,13 +8,14 @@ type ModalProps = {
     btnTxt1: string;
     btnTxt2: string;
     edit: boolean;
-    action: () => void;
+    action: string;
+    close: () => void;
 }
 
-const Modal: FC<ModalProps> = ({visible, title, btnTxt1, btnTxt2, edit = false, action }) => {
+const Modal: FC<ModalProps> = ({visible, title, btnTxt1, btnTxt2, edit, action, close }) => {
     return (
         <Container visible={visible}>
-           <Action title={title} btnTxt1={btnTxt1} btnTxt2={btnTxt2} edit={edit} action={action}  />
+           <Action title={title} btnTxt1={btnTxt1} btnTxt2={btnTxt2} edit={edit} action={action} close={close}  />
         </Container>
     )
 }

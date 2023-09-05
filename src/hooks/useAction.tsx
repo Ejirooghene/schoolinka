@@ -1,4 +1,4 @@
-import React, { FC, createContext, useContext, useState } from 'react';
+import React, { FC, createContext, useContext } from 'react';
 import { useTask } from './useTask';
 
 type ParentProps = {
@@ -8,18 +8,18 @@ type ParentProps = {
 type ContextValueType = {
     addTask: (val: string) => void;
     deleteTask: (val: string) => void;
-    // editTask: () => void; 
+    editTask: (val1: string, val2: string) => void; 
 }
 
 const Context = createContext<ContextValueType | undefined>(undefined);
 
 
 const Parent: FC<ParentProps> = ({ children }) => {
-    const [tasks, setTasks] = useTask();
+    const {tasks, setTasks} = useTask();
 
     const addTask = (value: string) => {
         const newTasks = [...tasks];
-        newTasks.unshift({user: 2, id: 2, title: value, completed: false});
+        newTasks.unshift({userId: 2, id: 2, title: value, completed: false});
         setTasks(newTasks);
     }
 
@@ -29,9 +29,28 @@ const Parent: FC<ParentProps> = ({ children }) => {
         setTasks(newTask);
     }
 
+    const editTask = (oldTitle: string, newTitle: string) => {
+        const taskCopy = [...tasks];
+      
+        const index = taskCopy.findIndex(task => task.title === oldTitle);
+      
+            const updatedTask = {
+                ...taskCopy[index],
+                title: newTitle,
+            };
+        
+            // Create a new array with the updated task
+            const updatedTaskCopy = [...taskCopy];
+            updatedTaskCopy[index] = updatedTask;
+        
+            setTasks(updatedTaskCopy);
+        };
+      
+
     const contextValue: ContextValueType = {
         addTask,
-        deleteTask
+        deleteTask,
+        editTask
     }
 
     return (

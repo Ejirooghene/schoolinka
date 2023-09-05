@@ -24,8 +24,8 @@ type ITask = {
 
 const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit, action, close }) => {
     const [value, setValue] = useState<string>('')
-    const [tasks, setTasks, currentTask, setCurrentTask] = useTask();
-    const { addTask, deleteTask } = useAction();
+    const {currentTask} = useTask();
+    const { addTask, deleteTask, editTask } = useAction();
 
     const handleAction = () => {
        switch(action){
@@ -33,14 +33,20 @@ const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit, action, close 
                 addTask(value);
                 break;
             case 'deleteTask':
-                deleteTask(currentTask.title);
+                if(currentTask){
+                    deleteTask(currentTask.title);
+                }
                 break;
+            case 'editTask':
+                if(currentTask){
+                    editTask(currentTask.title, value);
+                }
        }
     }
 
     return (
         <Modal>
-            <ModalHeader title={title} close={close} /> 
+            <ModalHeader title={title} close={close} setValue={setValue} /> 
             {
                 edit ? 
                 <>
@@ -60,6 +66,7 @@ const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit, action, close 
                     value={value}
                     onChange={e => setValue(e.target.value)}
                     rows={5}
+                    required
                     />
                     <DateTime>
                         <div>

@@ -3,6 +3,7 @@ import { Container, Body, Greeting, SubText, Tasks, Task, Footer, Input } from '
 import { Header, Calendar, Modal, Pagination } from '../../components';
 import { getGreeting } from '../../utils/greeting';
 import { useTask } from '../../hooks/useTask';
+import { useModal } from '../../hooks/useModal';
 
 type ITask = {
     userId: number;
@@ -12,28 +13,30 @@ type ITask = {
 }
 
 const Home: FC = () => {
-    const [tasks, setTasks, currentTask, setCurrentTask] = useTask();
+    const {tasks, setTasks, setCurrentTask} = useTask();
     const [focused, setFocused] = useState<number>(-1);
-    const [showAddTask, setShowAddTask] = useState<boolean>(false);
-    const [showDeleteTask, setShowDeleteTask] = useState<boolean>(false);
-    const [showEditTask, setShowEditTask] = useState<boolean>(false);
+    const { showAddTask, setShowAddTask, showDeleteTask, setShowDeleteTask, showEditTask, setShowEditTask } = useModal();
     const [start, setStart] = useState<number>(0);
     const [stop, setStop] = useState<number>(10);
 
     const toggleCheck = (index: number) => {
-        setTasks((prevState: ITask[]) => {
+        setTasks((prevState: any) => {
+
             const updatedState = [...prevState];
-
-            const currIndex = index + start
-            
-            updatedState[currIndex] = {
-                ...updatedState[currIndex],  
-                completed : !updatedState[currIndex].completed
-            }
-
+      
+            const currIndex = index + start;
+        
+            const updatedTask = {
+                ...updatedState[currIndex],
+                completed: !updatedState[currIndex].completed,
+            };
+        
+            updatedState[currIndex] = updatedTask;
+        
             return updatedState;
-        })
-    }
+        });
+      };
+      
 
     const handleFocus = (index: number, task: ITask) => {
         setFocused(index);

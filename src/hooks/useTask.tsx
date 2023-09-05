@@ -1,7 +1,7 @@
 import React, { FC, useState, createContext, useContext, useEffect } from 'react';
 import axios from 'axios';
+import { NullLiteral } from 'typescript';
 
-const Context = createContext<any>([]);
 
 type ParentProps = {
     children: React.ReactNode;
@@ -14,11 +14,26 @@ type ITask = {
     completed: boolean;
 }
 
+type ContextValueType = {
+    tasks: ITask[];
+    setTasks: (val: ITask[]) => void;
+    currentTask: ITask | null;
+    setCurrentTask: (val: (ITask | null)) => void;
+};
+
+const Context = createContext<ContextValueType | undefined>(undefined);
 
 
 const Parent: FC<ParentProps> = ({ children }) => {
     const [tasks, setTasks] = useState<ITask[]>([])
     const [currentTask, setCurrentTask] = useState<ITask | null>(null);
+
+    const contextValue: ContextValueType = {
+        tasks,
+        setTasks,
+        currentTask,
+        setCurrentTask
+    };
 
     useEffect(() => {
         (async() => {
@@ -28,14 +43,18 @@ const Parent: FC<ParentProps> = ({ children }) => {
     }, [])
 
     return (
-        <Context.Provider value={[tasks, setTasks, currentTask, setCurrentTask]}>
+        <Context.Provider value={contextValue}>
             {children}
         </Context.Provider>
     )
 }
 
-export const useTask = () => {
-    return useContext(Context); 
-}
+export const useTask = (): ContextValueType => {
+    const context = useContext(Context);
+    if (context === undefined) {
+      throw new Error("useAction must be used within a Parent component");
+    }
+    return context;
+}  
 
 export default Parent;

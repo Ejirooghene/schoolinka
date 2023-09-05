@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 import { Container, BtnCancel, BtnAdd } from './btnGroup.style';
+import { useModal } from '../../hooks/useModal';
+import { useTask } from '../../hooks/useTask';
 
 type BtnGroupProps = {
     first: string;
@@ -12,19 +14,33 @@ type BtnGroupProps = {
 
 
 const BtnGroup: FC<BtnGroupProps> = ({first, last, action, close, handleAction, setValue}) => {
+    const { setShowEditTask } = useModal();
+    const { currentTask } = useTask();
+
     const leftBtnHandler = () => {
         if(action === 'deleteTask'){
             handleAction();
+            close();
         } else {
-            close()
+           if(currentTask){
+            setValue(currentTask.title);
+           }
+            close();
         }
 
     }
 
     const rightBtnHandler = () => {
-        if(action === 'editTask' || action === 'addTask'){
+        if(action === 'editTask'){
+            handleAction();
+            close();
+        } else if(action === 'addTask'){
             handleAction();
             setValue('');
+            close();
+        } else {
+            setShowEditTask(true);
+            close();
         }
     }
 

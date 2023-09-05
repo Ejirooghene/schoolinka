@@ -18,7 +18,7 @@ const Header = () => {
                     <Profile>
                         <img src='svgs/avatar.svg' width='80px' height='80px' />
                         <div>
-                            <h6>Johnson Angelina</h6>
+                            <h6>Linda Yaccarino</h6>
                             <p>Twitter CEO</p>
                         </div>
                     </Profile>

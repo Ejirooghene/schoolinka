@@ -34,12 +34,7 @@ export const Menu = styled.div<MenuProps>`
     z-index: 2;
 
     & div {
-        // width: 200px;
         display: flex;
-        // justify-content: flex-start;
-        align-items: center;
-        margin-top: 20px;
-        // background-color: red;
 
         & > p {
             margin-left:10px;
@@ -75,6 +70,7 @@ export const Profile = styled.div`
     & > div {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         margin-left: 20px;
 
         & > h6 {
@@ -101,6 +97,7 @@ export const Notification = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 20px;
 
     & span {
         width: 20px;

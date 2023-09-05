@@ -13,7 +13,7 @@ type ITask = {
 
 const Home: FC = () => {
     const [tasks, setTasks, currentTask, setCurrentTask] = useTask();
-    const [focused, setFocused] = useState<number>(0);
+    const [focused, setFocused] = useState<number>(-1);
     const [showAddTask, setShowAddTask] = useState<boolean>(false);
     const [showDeleteTask, setShowDeleteTask] = useState<boolean>(false);
     const [showEditTask, setShowEditTask] = useState<boolean>(false);

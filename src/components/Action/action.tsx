@@ -84,7 +84,7 @@ const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit, action, close 
                     </Reminder>
                 </>
             }
-            <BtnGroup first={btnTxt1} last={btnTxt2} handleAction={handleAction} action={action} close={close} />
+            <BtnGroup first={btnTxt1} last={btnTxt2} handleAction={handleAction} action={action} close={close} setValue={setValue} />
         </Modal>    
     )
 }

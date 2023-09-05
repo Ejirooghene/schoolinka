@@ -7,13 +7,14 @@ type BtnGroupProps = {
     action: string;
     close: () => void;
     handleAction: () => void;
+    setValue: (val: string) => void;
 }
 
 
-const BtnGroup: FC<BtnGroupProps> = ({first, last, action, close, handleAction}) => {
+const BtnGroup: FC<BtnGroupProps> = ({first, last, action, close, handleAction, setValue}) => {
     const leftBtnHandler = () => {
         if(action === 'deleteTask'){
-            handleAction()
+            handleAction();
         } else {
             close()
         }
@@ -21,9 +22,10 @@ const BtnGroup: FC<BtnGroupProps> = ({first, last, action, close, handleAction})
     }
 
     const rightBtnHandler = () => {
-        if(action === 'editTask'){
-            handleAction()
-        } 
+        if(action === 'editTask' || action === 'addTask'){
+            handleAction();
+            setValue('');
+        }
     }
 
     return (

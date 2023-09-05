@@ -70,6 +70,7 @@ export const Task = styled.div<TaskProps>`
     // background-color: #f9fafb;
     margin-top: 10px;
     border-bottom: 2px solid #EAECF0;
+    cursor: pointer;
 
     & > div { 
         display: flex;

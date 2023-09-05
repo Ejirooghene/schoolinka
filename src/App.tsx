@@ -4,15 +4,16 @@ import GlobalStyle from './global.styles';
 import TaskParent from './hooks/useTask';
 import ActionParent from './hooks/useAction'
 
-
 function App() {
 return (
+  <>
+    <GlobalStyle />
     <TaskParent>
       <ActionParent>
-        <GlobalStyle />
         <Home />
       </ActionParent>
     </TaskParent>
+  </>
   );
 }
 

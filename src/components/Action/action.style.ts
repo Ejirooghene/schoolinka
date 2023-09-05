@@ -79,7 +79,7 @@ export const DateTime = styled.div`
 
 export const Task = styled.div`
     color: #272727;
-    font-family: Satoshi;
+    font-family: Work Sans;
     font-size: 18px;
     font-style: normal;
     font-weight: 700;

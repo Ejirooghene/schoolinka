@@ -1,101 +1,53 @@
-import React, { FC, useState, createContext, useContext } from 'react';
+import React, { FC, createContext, useContext, useState } from 'react';
 import { useTask } from './useTask';
-
-const Context = createContext<ContextValueType | undefined>(undefined);
 
 type ParentProps = {
     children: React.ReactNode;
 }
 
-type ITask = {
-    task: string;
-    start: string;
-    end: string;
-    completed: boolean;
-}
-
-type ContextActionType = {
-    setShowAddTask: (value: boolean) => void;
-    setShowDeleteTask: (value: boolean) => void;
-    setShowEditTask: (value: boolean) => void;
-    toggleCheck: (index: number) => void;
-    handleFocus: (index: number) => void;
+type ContextValueType = {
     addTask: (val: string) => void;
+    deleteTask: (val: string) => void;
+    // editTask: () => void; 
 }
 
-// type ContextValueType = {
-//     focused: number;
-//     showAddTask: boolean;
-//     showDeleteTask: boolean;
-//     showEditTask: boolean;
-// };
+const Context = createContext<ContextValueType | undefined>(undefined);
+
 
 const Parent: FC<ParentProps> = ({ children }) => {
-    const [focused, setFocused] = useState<number>(0);
-    const [showAddTask, setShowAddTask] = useState<boolean>(false);
-    const [showDeleteTask, setShowDeleteTask] = useState<boolean>(false);
-    const [showEditTask, setShowEditTask] = useState<boolean>(false);
     const [tasks, setTasks] = useTask();
 
-    const toggleCheck = (index: number) => {
-        setTasks((prevState: ITask[]) => {
-            const updatedState = [...prevState];
-            
-            updatedState[index] = {
-                ...updatedState[index],  
-                completed : !updatedState[index].completed
-            }
-
-            return updatedState;
-        })
+    const addTask = (value: string) => {
+        const newTasks = [...tasks];
+        newTasks.unshift({user: 2, id: 2, title: value, completed: false});
+        setTasks(newTasks);
     }
 
-    const handleFocus = (index: number) => {
-        setFocused(index);
+    const deleteTask = (title: string) => {
+        const taskCopy = [...tasks];
+        const newTask = taskCopy.filter(task => task.title !== title);
+        setTasks(newTask);
     }
 
-    const addTask = (val: string) => {
-        const task: ITask = {task: val, start: '04:00am', end: '06:00am', completed: false};
-        setTasks((prevState: ITask[]) => [task, ...prevState])
+    const contextValue: ContextValueType = {
+        addTask,
+        deleteTask
     }
 
-    const contextAction: ContextActionType = {
-        setShowAddTask,
-        setShowDeleteTask,
-        setShowEditTask,
-        toggleCheck,
-        handleFocus,
-        addTask
-    }
-    
-    // const contextValue: ContextValueType = {
-    //     focused,
-    //     showAddTask,
-    //     showDeleteTask,
-    //     showEditTask,
-    // };
-    
     return (
-        <Context.Provider value={addTask}>
+        <Context.Provider value={contextValue} >
             {children}
         </Context.Provider>
     )
 }
 
-export const useAction = () => {
+
+export const useAction = (): ContextValueType => {
     const context = useContext(Context);
     if (context === undefined) {
-        throw new Error("useAction must be used within a ParentProvider");
+      throw new Error("useAction must be used within a Parent component");
     }
     return context;
-}
-
-export const useActionValue = () => {
-    const context = useContext(Context);
-    if (context === undefined) {
-        throw new Error("useActionValue must be used within a ParentProvider");
-    }
-    return context; 
-}
+}  
 
 export default Parent;

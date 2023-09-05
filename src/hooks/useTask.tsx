@@ -1,4 +1,5 @@
-import React, { FC, useState, createContext, useContext } from 'react';
+import React, { FC, useState, createContext, useContext, useEffect } from 'react';
+import axios from 'axios';
 
 const Context = createContext<any>([]);
 
@@ -7,49 +8,27 @@ type ParentProps = {
 }
 
 type ITask = {
-    task: string;
-    start: string;
-    end: string;
+    userId: number;
+    id: number;
+    title: string;
     completed: boolean;
 }
 
-const Parent: FC<ParentProps> = ({ children }) => {
-    const [tasks, setTasks] = useState<ITask[]>([
-        {
-            task: 'Create Wireframe',
-            start: '10:30am',
-            end: '11:30am',
-            completed: false,
-        },
-        {
-            task: 'Go shopping',
-            start: '10:30am',
-            end: '11:30am',
-            completed: false,
-        },
-        {
-            task: 'Coding challenge',
-            start: '10:30am',
-            end: '11:30am',
-            completed: false,
-        },
-        {
-            task: 'Vercel deployment',
-            start: '10:30am',
-            end: '11:30am',
-            completed: false,
-        },
-        {
-            task: 'Vercel download',
-            start: '10:30am',
-            end: '11:30am',
-            completed: false,
-        },
 
-    ])
+
+const Parent: FC<ParentProps> = ({ children }) => {
+    const [tasks, setTasks] = useState<ITask[]>([])
+    const [currentTask, setCurrentTask] = useState<ITask | null>(null);
+
+    useEffect(() => {
+        (async() => {
+            const response: any = await axios.get('https://jsonplaceholder.typicode.com/todos?_limit=80');
+            setTasks(response.data);
+        })()
+    }, [])
 
     return (
-        <Context.Provider value={[tasks, setTasks]}>
+        <Context.Provider value={[tasks, setTasks, currentTask, setCurrentTask]}>
             {children}
         </Context.Provider>
     )

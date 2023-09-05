@@ -41,7 +41,7 @@ export const SubText = styled.p`
 export const Tasks = styled.section`
 
     & > div {
-        flex: 1;
+        height: 390px;
         padding-bottom: 30px;
         overflow-y: scroll;
 
@@ -57,7 +57,7 @@ export const Tasks = styled.section`
         font-style: normal;
         font-weight: 600;
         line-height: 32px;
-        // margin: 20px 0 20px 0;
+        margin: 0 0 20px 0;
     }
 `
 export const Task = styled.div<TaskProps>` 
@@ -109,8 +109,7 @@ export const Task = styled.div<TaskProps>`
 export const Footer = styled.footer`
     flex: none;
     background-color: #fff;
-    padding: 30px 20px 10px 20px;
-    // margin-top: 30px;
+    padding: 20px;
 `
 
 export const Input = styled.div`

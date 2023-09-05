@@ -4,16 +4,34 @@ import { Container, BtnCancel, BtnAdd } from './btnGroup.style';
 type BtnGroupProps = {
     first: string;
     last: string;
-    handleAction: (action: string) => void;
+    action: string;
+    close: () => void;
+    handleAction: () => void;
 }
 
-const BtnGroup: FC<BtnGroupProps> = ({first, last, handleAction}) => {
+
+const BtnGroup: FC<BtnGroupProps> = ({first, last, action, close, handleAction}) => {
+    const leftBtnHandler = () => {
+        if(action === 'deleteTask'){
+            handleAction()
+        } else {
+            close()
+        }
+
+    }
+
+    const rightBtnHandler = () => {
+        if(action === 'editTask'){
+            handleAction()
+        } 
+    }
+
     return (
         <Container>
-            <BtnCancel>
+            <BtnCancel onClick={leftBtnHandler}>
                 <p>{first}</p>
             </BtnCancel>
-            <BtnAdd onClick={handleAction}>
+            <BtnAdd onClick={rightBtnHandler}>
                 <p>{last}</p>
             </BtnAdd>
         </Container>

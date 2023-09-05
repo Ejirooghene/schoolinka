@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { Container, Btn, PageBtn } from './pagination.style';
 import { useTask } from '../../hooks/useTask';
 
@@ -12,9 +12,16 @@ type PaginationProps = {
 const Pagination: FC<PaginationProps> = ({ start, stop, setStart, setStop }) => {
     const [tasks] = useTask();
     const [focused, setFocused] = useState<number>(0);
+    const [totalPages, setTotalPages] = useState<number>(1); // Initialize with at least 1 page
+
+    useEffect(() => {
+        // Calculate the total number of pages based on the current start and stop range
+        const numberOfPages = Math.ceil(tasks.length / 10);
+        setTotalPages(numberOfPages);
+    }, [tasks, start, stop]);
 
     const next = () => {
-        if(stop === 80){
+        if (stop === 80) {
             return;
         }
         setStart(stop);
@@ -23,7 +30,7 @@ const Pagination: FC<PaginationProps> = ({ start, stop, setStart, setStop }) => 
     }
 
     const previous = () => {
-        if(start === 0){
+        if (start === 0) {
             return;
         }
         setStart(start - 10);
@@ -36,12 +43,11 @@ const Pagination: FC<PaginationProps> = ({ start, stop, setStart, setStop }) => 
         const newStop = (index + 1) * 10;
       
         if (newStart >= 0 && newStop <= tasks.length) {
-          setStart(newStart);
-          setStop(newStop);
-          setFocused(index);
+            setStart(newStart);
+            setStop(newStop);
+            setFocused(index);
         }
     };
-      
 
     return (
         <Container>
@@ -50,7 +56,7 @@ const Pagination: FC<PaginationProps> = ({ start, stop, setStart, setStop }) => 
                 <p>Previous</p>
             </Btn>
             <main>
-                {Array.from({length: tasks.length / 10 },(_, index) => index + 1).map((num: any, index: number) => (
+                {Array.from({ length: totalPages }, (_, index) => index + 1).map((num: any, index: number) => (
                     <PageBtn key={index.toString()} focused={focused === index} onClick={() => move(index)}>{num}</PageBtn>
                 ))}
             </main>

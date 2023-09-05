@@ -23,10 +23,12 @@ const Home: FC = () => {
     const toggleCheck = (index: number) => {
         setTasks((prevState: ITask[]) => {
             const updatedState = [...prevState];
+
+            const currIndex = index + start
             
-            updatedState[index] = {
-                ...updatedState[index],  
-                completed : !updatedState[index].completed
+            updatedState[currIndex] = {
+                ...updatedState[currIndex],  
+                completed : !updatedState[currIndex].completed
             }
 
             return updatedState;

@@ -7,13 +7,13 @@ interface TaskProps {
 
 export const Container = styled.div`
     height: 100vh;
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
     position: relative;
 `
 
 export const Body = styled.div`
-    flex: 1;
+    height: calc(100vh - 190px);
     padding: 0 20px;
     display: flex;
     flex-direction: column;
@@ -108,8 +108,8 @@ export const Task = styled.div<TaskProps>`
 `
 
 export const Footer = styled.footer`
-    flex: none;
-    background-color: #fff;
+    height: 120px;
+    background-color: red;
     padding: 20px;
 `
 

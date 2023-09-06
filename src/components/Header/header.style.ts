@@ -5,7 +5,6 @@ interface MenuProps {
 }
 
 export const Container = styled.header`
-    flex: none;
     height: 70px;
     display: flex;
     border-bottom: 1px solid #EAECF0;

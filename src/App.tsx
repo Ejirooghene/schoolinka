@@ -9,13 +9,13 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <TaskParent>
-        <ActionParent>
-          <ModalParent> 
-            <Home />
-          </ModalParent>
-        </ActionParent>
-      </TaskParent>
+      <ModalParent> 
+        <TaskParent>
+          <ActionParent>
+              <Home />
+          </ActionParent>
+        </TaskParent>
+      </ModalParent>
     </>
   );
 }

@@ -19,6 +19,10 @@ type ContextValueType = {
     setTasks: (val: ITask[]) => void;
     currentTask: ITask | null;
     setCurrentTask: (val: (ITask | null)) => void;
+    value: string;
+    setValue: (val: string) => void;
+    focusedBtn: number;
+    setFocusedBtn: (val: number) => void;
 };
 
 const Context = createContext<ContextValueType | undefined>(undefined);
@@ -27,12 +31,19 @@ const Context = createContext<ContextValueType | undefined>(undefined);
 const Parent: FC<ParentProps> = ({ children }) => {
     const [tasks, setTasks] = useState<ITask[]>([])
     const [currentTask, setCurrentTask] = useState<ITask | null>(null);
+    const [value, setValue] = useState<string>('')
+    const [focusedBtn, setFocusedBtn] = useState<number>(-1);
+
 
     const contextValue: ContextValueType = {
         tasks,
         setTasks,
         currentTask,
-        setCurrentTask
+        setCurrentTask,
+        value, 
+        setValue,
+        focusedBtn,
+        setFocusedBtn
     };
 
     useEffect(() => {

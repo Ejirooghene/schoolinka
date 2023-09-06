@@ -13,33 +13,30 @@ type ITask = {
 }
 
 const Home: FC = () => {
-    const {tasks, setTasks, setCurrentTask} = useTask();
-    const [focused, setFocused] = useState<number>(-1);
-    const { showAddTask, setShowAddTask, showDeleteTask, setShowDeleteTask, showEditTask, setShowEditTask } = useModal();
+    const {tasks, setTasks, setCurrentTask, focusedBtn, setFocusedBtn} = useTask();
+    const { showAddTask, setShowAddTask, showDeleteTask, setShowDeleteTask, showEditTask } = useModal();
     const [start, setStart] = useState<number>(0);
     const [stop, setStop] = useState<number>(10);
 
     const toggleCheck = (index: number) => {
-        setTasks((prevState: any) => {
+        const updatedState = [...tasks];
 
-            const updatedState = [...prevState];
+        const currIndex = index + start;
+        const updatedTask = {
+            ...updatedState[currIndex],
+            completed: !updatedState[currIndex].completed,
+        };
+
+        updatedState[currIndex] = updatedTask;
+
+        setTasks([...updatedState]);
+    }
       
-            const currIndex = index + start;
-        
-            const updatedTask = {
-                ...updatedState[currIndex],
-                completed: !updatedState[currIndex].completed,
-            };
-        
-            updatedState[currIndex] = updatedTask;
-        
-            return updatedState;
-        });
-      };
       
 
     const handleFocus = (index: number, task: ITask) => {
-        setFocused(index);
+        // setFocused(index);
+        setFocusedBtn(index);
         setCurrentTask(task);
     }
 
@@ -57,7 +54,6 @@ const Home: FC = () => {
                 btnTxt2='Add' 
                 edit={false} 
                 action='addTask' 
-                close={() => setShowAddTask(false)}
             />
 
             <Modal 
@@ -67,7 +63,6 @@ const Home: FC = () => {
                 btnTxt2='Edit' 
                 edit={true} 
                 action='deleteTask' 
-                close={() => setShowDeleteTask(false)} 
             />
             <Modal 
                 visible={showEditTask} 
@@ -76,7 +71,6 @@ const Home: FC = () => {
                 edit={false} 
                 btnTxt2='Save' 
                 action='editTask' 
-                close={() => setShowEditTask(false)} 
             />
             <Header />
             <Body>
@@ -90,7 +84,7 @@ const Home: FC = () => {
                             tasks.slice(start, stop).map((task: ITask, index: number) => (
                                 <Task 
                                     completed={task.completed} 
-                                    focused={index === focused} 
+                                    focused={index === focusedBtn} 
                                     onClick={() => handleFocus(index, task)} 
                                     onDoubleClick={() => doubleClickHandler(task)} 
                                     key={task.title}

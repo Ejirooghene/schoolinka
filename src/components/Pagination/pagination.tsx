@@ -10,7 +10,7 @@ type PaginationProps = {
 }
 
 const Pagination: FC<PaginationProps> = ({ start, stop, setStart, setStop }) => {
-    const {tasks} = useTask();
+    const {tasks, setFocusedBtn } = useTask();
     const [focused, setFocused] = useState<number>(0);
 
     const next = () => {
@@ -37,6 +37,7 @@ const Pagination: FC<PaginationProps> = ({ start, stop, setStart, setStop }) => 
         } else {
             previous()
         }
+        setFocusedBtn(-1);
         setFocused(index);
     }
 

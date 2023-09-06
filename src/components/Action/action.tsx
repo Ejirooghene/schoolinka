@@ -3,7 +3,6 @@ import { Modal, TextInput, Reminder, DateTime, Task, Date, Time } from './action
 import ModalHeader from '../ModalHeader/modalHeader';
 import BtnGroup from '../BtnGroup/btnGroup';
 import { useTask } from '../../hooks/useTask';
-import { useAction } from '../../hooks/useAction';
 
 
 type ActionProps = {
@@ -12,41 +11,14 @@ type ActionProps = {
     btnTxt2: string;
     edit: boolean;
     action: string;
-    close: () => void;
 }
 
-type ITask = {
-    task: string;
-    start: string;
-    end: string;
-    completed: boolean;
-}
-
-const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit, action, close }) => {
-    const [value, setValue] = useState<string>('')
-    const {currentTask} = useTask();
-    const { addTask, deleteTask, editTask } = useAction();
-
-    const handleAction = () => {
-       switch(action){
-            case 'addTask':
-                addTask(value);
-                break;
-            case 'deleteTask':
-                if(currentTask){
-                    deleteTask(currentTask.title);
-                }
-                break;
-            case 'editTask':
-                if(currentTask){
-                    editTask(currentTask.title, value);
-                }
-       }
-    }
+const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit, action }) => {
+    const {currentTask, value, setValue } = useTask();
 
     return (
         <Modal>
-            <ModalHeader title={title} close={close} setValue={setValue} /> 
+            <ModalHeader title={title} action={action} /> 
             {
                 edit ? 
                 <>
@@ -91,7 +63,7 @@ const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit, action, close 
                     </Reminder>
                 </>
             }
-            <BtnGroup first={btnTxt1} last={btnTxt2} handleAction={handleAction} action={action} close={close} setValue={setValue} />
+            <BtnGroup first={btnTxt1} last={btnTxt2} action={action} />
         </Modal>    
     )
 }

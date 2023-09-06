@@ -97,16 +97,33 @@ export const Notification = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
+    margin-bottom: 20px;
+
+    & > div {
+        display: flex;
+        align-items: center;
+    }
 
     & span {
         width: 20px;
         height: 20px;
         background-color: red;
         color: #fff;
+        text-align: center;
+        font-family: Work Sans;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px; 
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 50%;
     }
+`
+
+export const Settings = styled.div`
+    display: flex;
+    // justify-content: space-between;
+    align-items: center;
 `

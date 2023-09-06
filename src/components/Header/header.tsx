@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Container, Logo, LogoText, Menu, Profile, Notification } from './header.style';
+import { Container, Logo, LogoText, Menu, Profile, Notification, Settings } from './header.style';
 
 const Header = () => {
     const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -22,10 +22,6 @@ const Header = () => {
                             <p>Twitter CEO</p>
                         </div>
                     </Profile>
-                    <div>
-                        <img src='svgs/settings.svg' width='30px' height='30px' />
-                        <p>Settings</p>
-                    </div>
                     <Notification>
                         <div>
                             <img src='svgs/bell-outline.svg' width='30px' height='30px' />
@@ -33,6 +29,10 @@ const Header = () => {
                         </div>
                         <span>7</span>
                     </Notification>
+                    <Settings>
+                        <img src='svgs/settings.svg' width='30px' height='30px' />
+                        <p>Settings</p>
+                    </Settings>
                 </Menu> 
             }
         </Container>

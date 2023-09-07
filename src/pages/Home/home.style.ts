@@ -22,7 +22,7 @@ export const Body = styled.div`
 export const Greeting = styled.p`
     color: #101828;
     font-family: Inter;
-    font-size: 30px;
+    font-size: 24px;
     font-style: normal;
     font-weight: 600;
     line-height: 32px;
@@ -35,15 +35,16 @@ export const SubText = styled.p`
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px;
+    line-height: 30px;
 `
 
 export const Tasks = styled.section`
+    // flex-grow: 1;
+    padding-bottom: 30px;
+    overflow-y: scroll;
 
-    & > div {
-        height: 390px;
-        padding-bottom: 30px;
-        overflow-y: scroll;
+    // & > div {
+    //     height: 70px;
 
         &::-webkit-scrollbar {
             width: 0.1rem;
@@ -109,7 +110,7 @@ export const Task = styled.div<TaskProps>`
 
 export const Footer = styled.footer`
     height: 120px;
-    background-color: red;
+    background-color: #fff;
     padding: 20px;
 `
 

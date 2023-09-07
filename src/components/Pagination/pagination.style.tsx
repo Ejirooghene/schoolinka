@@ -47,4 +47,6 @@ export const Btn = styled.div`
     font-weight: 600;
     line-height: 20px; 
     cursor: pointer;
+
+    
 `

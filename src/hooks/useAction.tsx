@@ -18,14 +18,13 @@ const Context = createContext<ContextValueType | undefined>(undefined);
 
 
 const Parent: FC<ParentProps> = ({ children }) => {
-    const {tasks, setTasks, currentTask, value, setValue} = useTask();
+    const {tasks, setTasks, currentTask, value, setValue, date, setDate, start, setStart, stop, setStop, setAddReminder, setStrikeReminder} = useTask();
     const {setShowAddTask, setShowDeleteTask, setShowEditTask} = useModal();
 
 
     const addTask = (value: string) => {
-        const newTasks = [...tasks];
-        newTasks.unshift({userId: 2, id: 2, title: value, completed: false});
-        setTasks(newTasks);
+        const newTask = [{userId: 1, id: 1, title: value, completed: false, date, start, stop}, ...tasks];
+        setTasks([...newTask]); 
     }
 
     const deleteTask = (title: string) => {
@@ -42,6 +41,9 @@ const Parent: FC<ParentProps> = ({ children }) => {
             const updatedTask = {
                 ...taskCopy[index],
                 title: newTitle,
+                date,
+                start,
+                stop
             };
         
         const updatedTaskCopy = [...taskCopy];
@@ -53,17 +55,18 @@ const Parent: FC<ParentProps> = ({ children }) => {
     const actionHandler = (action: string) => {
         switch(action){
              case 'addTask':
-                 addTask(value);
-                 break;
+                addTask(value);
+                break;
              case 'deleteTask':
-                 if(currentTask){
-                     deleteTask(currentTask.title);
-                 }
-                 break;
+                if(currentTask){
+                    deleteTask(currentTask.title);
+                }
+                break;
              case 'editTask':
-                 if(currentTask){
-                     editTask(currentTask.title, value);
-                 }
+                if(currentTask){
+                    editTask(currentTask.title, value);
+                }
+                break;
         }
      }
 
@@ -72,30 +75,42 @@ const Parent: FC<ParentProps> = ({ children }) => {
         if(action === 'deleteTask'){
             actionHandler(action);
             setShowDeleteTask(false);
+            return;
         } else if(action === 'addTask'){
             setShowAddTask(false);
         } else {
             setShowEditTask(false);
         }
+        setStrikeReminder(false);
         setValue('');
+        setDate('YYYY/MM/DD');
+        setStart('00:00');
+        setStop('00:00');
     }
 
     const rightBtnHandler = (action: string) => {
         if(currentTask){
             if(action === 'editTask'){
                 actionHandler(action);
-                setValue('');
                 setShowEditTask(false);
             } else if(action === 'addTask'){
                 actionHandler(action);
-                setValue('');
                 setShowAddTask(false);
             } else {
                 setShowEditTask(true);
                 setValue(currentTask.title);
+                setDate(currentTask.date);
+                setStart(currentTask.start);
+                setStop(currentTask.stop);
                 setShowDeleteTask(false);
+                return;
             }
         }
+        setStrikeReminder(false);
+        setValue('');
+        setDate('YYYY/MM/DD');
+        setStart('00:00');
+        setStop('00:00');
     }
             
 

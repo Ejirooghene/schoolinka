@@ -1,6 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`  
+    :root {
+        --mobile: 768px;
+    }
+
     * {
         margin: 0;
         padding: 0;

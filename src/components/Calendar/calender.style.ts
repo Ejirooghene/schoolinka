@@ -48,19 +48,4 @@ export const Date = styled.div<DateProps>`
     border: 0.796px solid ${(prop) => prop.current ? '#3F5BF6' : '#D0D5DD'} ;
     background: ${(prop) => prop.current ? '#3F5BF6' : '#fff'};
     box-shadow: 0px 0.7963px 1.59259px 0px rgba(16, 24, 40, 0.05);
-
-    // &:nth-child(2){
-    //     display: flex;
-    //     width: 49.37px;
-    //     padding: 7.963px 26px;
-    //     flex-direction: column;
-    //     justify-content: center;
-    //     align-items: center;
-    //     gap: 6.37px;
-    //     border-radius: 6.37px;
-    //     border: 0.796px solid #3F5BF6;
-    //     background: #3F5BF6;
-    //     box-shadow: 0px 0.7963px 1.59259px 0px rgba(16, 24, 40, 0.05);
-    //     color: #fff;
-    // }
 ` 

@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
+type ReminderProp = {
+    strikeReminder: boolean;
+}
 
-export const Modal = styled.div`
+
+export const Container = styled.div`
     width: 100%;
     min-height: 50vh;
     background-color: #FFF;
@@ -28,7 +32,7 @@ export const TextInput = styled.textarea`
     resize: none;
 `
 
-export const Reminder = styled.div`
+export const Reminder = styled.div<ReminderProp>`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -44,8 +48,13 @@ export const Reminder = styled.div`
             font-style: normal;
             font-weight: 500;
             line-height: normal;
-            margin-left: 20px;
+            margin-left: 5px;
+            text-decoration: ${prop => prop.strikeReminder ? 'line-through' : 'none'};
         }
+    }
+
+    & > img {
+        cursor: pointer;
     }
 `
 
@@ -57,7 +66,7 @@ export const DateTime = styled.div`
 
     div {
         display: flex;
-        padding: 10px 26px;
+        padding: 10px 10px;
         justify-content: center;
         align-items: center;
         gap: 8px;
@@ -65,6 +74,7 @@ export const DateTime = styled.div`
         border: 1px solid #D0D5DD;
         background: #FFF;
         box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+        cursor: pointer;
 
         p {
             color: var(--gray-500, #667085);

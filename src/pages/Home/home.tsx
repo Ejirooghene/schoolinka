@@ -1,19 +1,15 @@
 import React, { FC, useState } from 'react';
 import { Container, Body, Greeting, SubText, Tasks, Task, Footer, Input } from './home.style';
-import { Header, Calendar, Modal, Pagination } from '../../components';
+import { Header, Calendar, Modal, Pagination, Action } from '../../components';
 import { getGreeting } from '../../utils/greeting';
+import { moment } from '../../utils/date';
 import { useTask } from '../../hooks/useTask';
 import { useModal } from '../../hooks/useModal';
+import { ITask } from '../../types/type';
 
-type ITask = {
-    userId: number;
-    id: number;
-    title: string;
-    completed: boolean;
-}
 
 const Home: FC = () => {
-    const {tasks, setTasks, setCurrentTask, focusedBtn, setFocusedBtn} = useTask();
+    const {tasks, setTasks, setCurrentTask, focusedBtn, setFocusedBtn, date} = useTask();
     const { showAddTask, setShowAddTask, showDeleteTask, setShowDeleteTask, showEditTask } = useModal();
     const [start, setStart] = useState<number>(0);
     const [stop, setStop] = useState<number>(10);
@@ -29,7 +25,7 @@ const Home: FC = () => {
 
         updatedState[currIndex] = updatedTask;
 
-        setTasks([...updatedState]);
+        setTasks([...updatedState]); 
     }
       
       
@@ -37,7 +33,7 @@ const Home: FC = () => {
     const handleFocus = (index: number, task: ITask) => {
         // setFocused(index);
         setFocusedBtn(index);
-        setCurrentTask(task);
+        setCurrentTask(task); 
     }
 
     const doubleClickHandler = (task: ITask) => {
@@ -47,31 +43,15 @@ const Home: FC = () => {
 
     return (
         <Container>
-            <Modal 
-                visible={showAddTask} 
-                title='Add Task' 
-                btnTxt1='Cancel' 
-                btnTxt2='Add' 
-                edit={false} 
-                action='addTask' 
-            />
-
-            <Modal 
-                visible={showDeleteTask} 
-                title='' 
-                btnTxt1='Delete' 
-                btnTxt2='Edit' 
-                edit={true} 
-                action='deleteTask' 
-            />
-            <Modal 
-                visible={showEditTask} 
-                title='Edit Task' 
-                btnTxt1='Cancel' 
-                edit={false} 
-                btnTxt2='Save' 
-                action='editTask' 
-            />
+            <Modal visible={showAddTask}>
+                <Action title='Add Task' btnTxt1='Cancel' btnTxt2='Add' edit={false} action='addTask' />
+            </Modal>
+            <Modal visible={showDeleteTask}>
+                <Action title='' btnTxt1='Delete' btnTxt2='Edit' edit={true} action='deleteTask' />
+            </Modal>
+            <Modal visible={showEditTask}>
+                <Action title='Edit Task' btnTxt1='Cancel' btnTxt2='Save' edit={false} action='editTask' />
+            </Modal>
             <Header />
             <Body>
                 <Greeting>{getGreeting()}</Greeting>
@@ -97,10 +77,10 @@ const Home: FC = () => {
                                         onClick={() => toggleCheck(index)} />
                                         <div>
                                             <h4>{task.title}</h4>
-                                            <p>timer</p>
+                                            <p>{task.start || '08:00am'} - {task.stop || '09:00am'}</p>
                                         </div>
                                     </div>
-                                    <p>Today</p>
+                                    <p>{task.date ? moment(task.date) : 'Today'}</p>
                                 </Task>
                             ))
                         }

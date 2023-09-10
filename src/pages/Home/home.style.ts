@@ -17,6 +17,10 @@ export const Body = styled.div`
     padding: 0 20px;
     display: flex;
     flex-direction: column;
+
+    @media (min-width: var(--mobile)){
+       display: none;
+    }
 `
 
 export const Greeting = styled.p`
@@ -112,6 +116,10 @@ export const Footer = styled.footer`
     height: 120px;
     background-color: #fff;
     padding: 20px;
+
+    @media (min-width: var(--mobile)){
+        display: none;
+    }
 `
 
 export const Input = styled.div`

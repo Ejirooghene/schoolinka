@@ -14,4 +14,8 @@ export const Container = styled.header`
         font-weight: 600;
         line-height: 28px;
     }
+
+    img {
+        cursor: pointer;
+    }
 `

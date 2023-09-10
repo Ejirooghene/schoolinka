@@ -15,14 +15,21 @@ export const Container = styled.header`
         justify-content: space-between;
         align-items: center;
         padding: 0 20px;
+
+        & > img {
+            cursor: pointer;
+        }
+    }
+
+    @media (min-width: var(--mobile)){
+        div > img {
+            display: none;
+        }
     }
 `
 
 export const Menu = styled.div<MenuProps>`
-    height: 100%;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
+    height: calc(100% - 71px);
     background-color: #fff; 
     padding: 30px 40px;
     position: absolute;
@@ -44,6 +51,10 @@ export const Menu = styled.div<MenuProps>`
             font-weight: 600;
             line-height: 24px;
         }
+    }
+
+    @media (min-width: var(--mobile)){
+        display: none;
     }
 `
 
@@ -110,7 +121,7 @@ export const Notification = styled.div`
         color: #fff;
         text-align: center;
         font-family: Work Sans;
-        font-size: 14px;
+        font-size: 12px;
         font-style: normal;
         font-weight: 500;
         line-height: 20px; 

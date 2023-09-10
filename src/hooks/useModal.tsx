@@ -13,7 +13,7 @@ type ContextValueType = {
 const Context = createContext<ContextValueType | undefined>(undefined);
 
 type ParentProps = {
-    children: React.ReactNode;
+    children: React.ReactNode;  
 };
 
 const Parent: FC<ParentProps> = ({ children }) => {

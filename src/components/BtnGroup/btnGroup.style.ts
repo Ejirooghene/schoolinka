@@ -28,6 +28,7 @@ export const BtnCancel = styled.div`
     border: 1px solid #D0D5DD;
     background: #FFF;
     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    cursor: pointer;
 
     p {
         color: #344054;
@@ -39,6 +40,7 @@ export const BtnAdd = styled.div`
     border: 1px solid #3F5BF6;
     background: #3F5BF6;
     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    cursor: pointer;
 
     p {
         color: #fff;

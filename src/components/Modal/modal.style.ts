@@ -16,4 +16,8 @@ export const Container = styled.div<ContainerProps>`
     left: 0;
     right: 0;
     z-index: 1;
+
+    @media (min-width: 768px){
+      display: none;
+    }
 `

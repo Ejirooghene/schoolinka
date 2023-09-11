@@ -7,9 +7,11 @@ interface TaskProps {
 
 export const Container = styled.div`
     height: 100vh;
-    // display: flex;
-    // flex-direction: column;
     position: relative;
+
+    @media (min-width: 768px){
+        display: flex;
+    }
 `
 
 export const Body = styled.div`
@@ -18,8 +20,10 @@ export const Body = styled.div`
     display: flex;
     flex-direction: column;
 
-    @media (min-width: var(--mobile)){
-       display: none;
+    @media (min-width: 768px){
+       width: 65%;
+       height: 100%;
+       padding: 70px 0 0 32px;
     }
 `
 
@@ -30,7 +34,7 @@ export const Greeting = styled.p`
     font-style: normal;
     font-weight: 600;
     line-height: 32px;
-    margin: 20px 0 0 0;
+    margin-top: 20px;
 `
 
 export const SubText = styled.p`
@@ -43,16 +47,13 @@ export const SubText = styled.p`
 `
 
 export const Tasks = styled.section`
-    // flex-grow: 1;
     padding-bottom: 30px;
     overflow-y: scroll;
 
-    // & > div {
-    //     height: 70px;
+    &::-webkit-scrollbar {
+        width: 0.1rem;
+    }
 
-        &::-webkit-scrollbar {
-            width: 0.1rem;
-        }
     }
 
     h2 {
@@ -62,7 +63,11 @@ export const Tasks = styled.section`
         font-style: normal;
         font-weight: 600;
         line-height: 32px;
-        margin: 0 0 20px 0;
+        margin-bottom: 20px;
+    }
+
+    @media (min-width: 768px) {
+        overflow-y: visible;
     }
 `
 export const Task = styled.div<TaskProps>` 
@@ -112,12 +117,65 @@ export const Task = styled.div<TaskProps>`
     }
 `
 
+export const Bottom = styled.footer`
+    display: none;
+
+    @media (min-width: 768px){
+        display: block;
+        padding: 20px 0;
+    }
+`
+
+export const Side = styled.aside`   
+    display: none;
+
+    @media (min-width: 768px){
+        width: 35%;
+        padding: 70px 32px 0 20px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-center: center;
+        position: fixed;
+        right: 0;
+    
+        & > main {
+            width: 100%;
+            height: 100vh;
+            border-left: 2px solid #EAECF0;
+            padding: 0 0 0 20px;
+            margin-top: 40px;
+        }
+    }
+`
+
+export const NewBtn = styled.div`
+    height: 40px;
+    display: flex;
+    align-self: flex-end;
+    padding: 10px 16px 10px 16px;
+    border-radius: 8px;
+    background-color: #3f5bf6;
+    border: 1px solid #3f5bf6;
+    gap: 8px;
+    cursor: pointer;
+
+    & > p {
+        color: #fff;
+        font-family: Work Sans;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 20px;
+        text-align: left;
+    }
+`
+
 export const Footer = styled.footer`
     height: 120px;
     background-color: #fff;
     padding: 20px;
 
-    @media (min-width: var(--mobile)){
+    @media (min-width: 768px){
         display: none;
     }
 `
@@ -139,4 +197,5 @@ export const Input = styled.div`
     border: 1px solid #D0D5DD;
     background: #F9FAFB;
     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+
 `

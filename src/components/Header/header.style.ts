@@ -21,10 +21,28 @@ export const Container = styled.header`
         }
     }
 
-    @media (min-width: var(--mobile)){
-        div > img {
+    @media (min-width: 768px){
+        width: 100vw;
+        background-color: #fff;
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+        z-index: 3;
+
+        & > div > img {
             display: none;
         }
+    }
+`
+
+export const FullMenu = styled.nav`
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding-right: 20px;
+
+    @media (max-width: 768px){
+        display: none;
     }
 `
 
@@ -53,8 +71,8 @@ export const Menu = styled.div<MenuProps>`
         }
     }
 
-    @media (min-width: var(--mobile)){
-        display: none;
+    @media (min-width: 768px){
+       display: none;
     }
 `
 

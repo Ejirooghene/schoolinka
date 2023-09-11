@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Container, Body, Greeting, SubText, Tasks, Task, Footer, Input } from './home.style';
+import { Container, Body, Greeting, SubText, Tasks, Task, Bottom, Side, NewBtn, Footer, Input } from './home.style';
 import { Header, Calendar, Modal, Pagination, Action } from '../../components';
 import { getGreeting } from '../../utils/greeting';
 import { moment } from '../../utils/date';
@@ -38,6 +38,7 @@ const Home: FC = () => {
 
     const doubleClickHandler = (task: ITask) => {
         setCurrentTask(task);
+        setShowAddTask(false);
         setShowDeleteTask(true);
     }
 
@@ -86,7 +87,26 @@ const Home: FC = () => {
                         }
                     </div>
                 </Tasks>
+                <Bottom>
+                    <Pagination start={start} stop={stop} setStart={setStart} setStop={setStop} />
+                </Bottom>
             </Body>
+            <Side>
+                <NewBtn onClick={() => setShowAddTask(true)}>
+                    <img src='svgs/plus.svg' width='20px' height='20px' />
+                    <p>Create New Task</p>
+                </NewBtn>
+                <main>
+                    {   
+                        showAddTask && <Action title='Add Task' btnTxt1='Cancel' btnTxt2='Add'  edit={false} action='addTask' /> }
+                    {
+                        showDeleteTask && <Action title='' btnTxt1='Delete' btnTxt2='Edit' edit={true} action='deleteTask' />
+                    }
+                    {
+                        showEditTask && <Action title='Edit Task' btnTxt1='Cancel' btnTxt2='Save' edit={false} action='editTask' />
+                    }
+                </main>
+            </Side>
             <Footer>
                 <Pagination start={start} stop={stop} setStart={setStart} setStop={setStop} />
                 <Input onClick={() => setShowAddTask(true)}>

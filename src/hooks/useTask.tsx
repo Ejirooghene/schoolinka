@@ -14,11 +14,11 @@ type ContextValueType = {
     setCurrentTask: (val: (ITask | null)) => void;
     value: string;
     setValue: (val: string) => void;
-    date: string;
+    date?: string;
     setDate: (val: string | undefined) => void;
-    start: string;
+    start?: string;
     setStart: (val: string | undefined) => void;
-    stop: string;
+    stop?: string;
     setStop: (val: string | undefined) => void; 
     addReminder: boolean;
     setAddReminder: (val: boolean) => void;
@@ -34,7 +34,7 @@ const Context = createContext<ContextValueType | undefined>(undefined);
 const Parent: FC<ParentProps> = ({ children }) => {
     const [tasks, setTasks] = useState<ITask[]>([])
     const [currentTask, setCurrentTask] = useState<ITask | null>(null);
-    const [value, setValue] = useState<string>('');
+    const [value, setValue] = useState<string >('');
     const [date, setDate] = useState<string | undefined>('YYYY/MM/DD')
     const [start, setStart] = useState<string | undefined>('00:00')
     const [stop, setStop] = useState<string | undefined>('00:00')

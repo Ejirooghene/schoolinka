@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Container, Logo, LogoText, Menu, Profile, Notification, Settings } from './header.style';
+import { Container, Logo, LogoText, Menu, FullMenu, Profile, Notification, Settings } from './header.style';
 
 const Header = () => {
     const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -13,6 +13,11 @@ const Header = () => {
                 </Logo>
                 <img src={`svgs/${showMenu ? 'close' : 'menu'}.svg`} width='20px' height='20px' onClick={() => setShowMenu(!showMenu)} />
             </div>
+            <FullMenu>
+                <img src='svgs/settings.svg' width='20px' height='20px' />
+                <img src='svgs/bell-outline.svg' width='20px' height='20px' />
+                <img src='svgs/avatar.svg' width='40px' height='40px' />
+            </FullMenu>
             {   
                 showMenu && <Menu showMenu={showMenu}>
                     <Profile>

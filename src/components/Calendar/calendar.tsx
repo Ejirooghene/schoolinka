@@ -9,11 +9,9 @@ const Calendar: FC = () => {
     const [x, setX] = useState(null);
 
     window.onload = () => {
-        // This code will run after all assets have loaded
         if (dateRef.current && containerRef.current) {
             const rect = dateRef.current.getBoundingClientRect();
-            // Scroll to the left
-            containerRef.current.scrollLeft = rect.left - 20;
+            containerRef.current.scrollLeft = rect.left - 26;
         }
     };
     

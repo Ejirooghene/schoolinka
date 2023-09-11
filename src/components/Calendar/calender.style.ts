@@ -36,16 +36,17 @@ export const Date = styled.div<DateProps>`
     width: 49.37px;
     color: ${(prop) => prop.current ? '#fff' : '#000'};
     font-family: Inter;
-    font-size: 14px;
+    font-size: 11.14px;
     font-style: normal;
     font-weight: 600;
-    padding: 7.963px 26px;
+    // padding: 7.963px 26px;
+    padding: 8px 13px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 6.37px;
-    border-radius: 6.37px;
-    border: 0.796px solid ${(prop) => prop.current ? '#3F5BF6' : '#D0D5DD'} ;
+    border-radius: 6px;
+    border: 1px solid ${(prop) => prop.current ? '#3F5BF6' : '#D0D5DD'} ;
     background: ${(prop) => prop.current ? '#3F5BF6' : '#fff'};
     box-shadow: 0px 0.7963px 1.59259px 0px rgba(16, 24, 40, 0.05);
 ` 

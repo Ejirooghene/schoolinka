@@ -16,12 +16,22 @@ export const getCurrentDay = () => {
     return currentDate.getDate();
 }
 
-export const getToday = () => {
-    const currentDate = new Date();
-    const month = currentDate.getMonth() + 1;
-    const date = currentDate.getDate();
-    const year = currentDate.getFullYear();
-    return `${month}/${date}/${year}`;
+export const getToday = (_date: string): string => {
+
+    const months = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    const targetDate = new Date(_date);
+    const date: string = String(targetDate.getDate());
+    const month: number = targetDate.getMonth();
+    const year: number = targetDate.getFullYear();
+    return `${date}${date.endsWith('1') && date !== '11' ? 'st' : date.endsWith('2') && date !== '12' ? 'nd' : date.endsWith('3') && date !== '13' ? 'rd' : 'th'} ${months[month]} ${year}`
+    // const month = targetDate.getMonth() + 1;
+    // const date = targetDate.getDate();
+    // const year = targetDate.getFullYear();
+    // return `${month} ${date} ${year}`;
 }
 
 export const getDatesAndDaysOfWeekInCurrentMonth = () => {
@@ -53,7 +63,7 @@ const getDayOfWeekName = (dayOfWeek: number) => {
     return daysOfWeekNames[dayOfWeek];
 }
 
-const momentHelper = (day: string = 'Today', duration: string = 'from now', diff: number) => {
+const momentHelper = (day: string, duration: string, diff: number) => {
     const absDiff = Math.abs(diff);
 
     if (absDiff === 1) {
@@ -74,14 +84,14 @@ export const moment = (_date: string): string => {
     if (diff < 0) {
         return momentHelper('Yesterday', 'ago', diff);
     } else if (diff > 0) {
-        // momentHelper(diff);
-        return ''
+        return momentHelper('Today', 'from now', diff);
     } else {
         return 'Today'
     }
 };
 
-export const strikeThroughReminder = (_date: string, _time: string): boolean => {
+export const strikeThroughReminder = (_date: string | undefined, _time: string): boolean => {
+    if(!_date) return false;
     const currentDate: any = new Date();
 
     const [hours, minutes] = _time.split(':').map(Number);

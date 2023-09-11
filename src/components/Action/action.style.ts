@@ -10,10 +10,30 @@ export const Container = styled.div`
     min-height: 50vh;
     background-color: #FFF;
     padding: 20px;
-    border-radius: 30px  30px 0 0;
+    border-radius: 30px 30px 0 0;
     position: absolute; 
     bottom: 0;
     z-index: 2;
+
+    & .date {
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 10px;
+    }
+
+    @media (min-width: 768px){
+        padding: 10px;
+        border-radius: 10px;
+        position: relative;
+        border: 1px solid #F2F4F7;
+        box-shadow: 0px 8px 8px -4px rgba(16, 24, 40, 0.03), 0px 20px 24px -4px rgba(16, 24, 40, 0.08);
+    }
 `
 
 export const TextInput = styled.textarea`

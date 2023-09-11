@@ -14,6 +14,10 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         gap: 5px;
+
+        @media (min-width: 768px){
+            gap: 10px;
+        }
     }
 
 `
@@ -34,6 +38,10 @@ export const PageBtn = styled.span<PageBtnProp>`
     line-height: 20px; 
     border-radius: 50%;
     cursor: pointer;
+
+    @media (min-width: 768px){
+        font-size: 14px;
+    }
 `
 
 export const Btn = styled.div`

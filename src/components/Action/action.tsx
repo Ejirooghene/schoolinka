@@ -21,8 +21,6 @@ const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit, action }) => {
     const [showStartModal, setShowStartModal] = useState<boolean>(false);
     const [showStopModal, setShowStopModal] = useState<boolean>(false);
     const {currentTask, value, setValue, date, setDate, start, setStart, stop, setStop, addReminder, setAddReminder, strikeReminder, setStrikeReminder} = useTask();
-    const today = getToday();
-
 
     return (
         <>
@@ -69,6 +67,43 @@ const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit, action }) => {
                 }}
                 />
             </Modal>
+            { 
+                visible &&  <DateCalendar 
+                disablePast
+                onChange={(val: any) => {
+                    setDate(`${val.$y}/${val.$M + 1}/${val.$D}`);
+                    setVisible(false);
+                }}
+                className='date'
+                />
+            }
+            { 
+                showStartModal &&  <TimeClock 
+                disablePast
+                ampmInClock
+                className='date'
+                onChange={(val: any, status: any) => {
+                    setStart(`${String(val.$H).padStart(2, '0')}:${String(val.$m).padStart(2, '0')}`);
+                    if (status === 'finish') {
+                        setStrikeReminder(strikeThroughReminder(date, `${String(val.$H).padStart(2, '0')}:${String(val.$m).padStart(2, '0')}`));
+                        setShowStartModal(false);
+                    }
+                }}
+                />
+            }
+            {
+                showStopModal && <TimeClock 
+                ampmInClock
+                className='date'
+                onChange={(val: any, status: any) => {
+                    setStop(`${String(val.$H).padStart(2, '0')}:${String(val.$m).padStart(2, '0')}`);
+                    if (status === 'finish') {
+                        setShowStopModal(false);
+                    }
+                }}
+                />
+            }
+
                 <ModalHeader title={title} action={action} /> 
                 {
                     edit ? 
@@ -76,11 +111,11 @@ const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit, action }) => {
                         <Task>{currentTask?.title}</Task>
                         <Date>
                             <img src='svgs/bluecalendar.svg' width='20px' height='20px' />
-                            <p>11th September 2023</p>
+                            <p>{ currentTask?.date ? getToday(currentTask?.date) : '11th September 2023'}</p>
                         </Date>
                         <Time>
                             <img src='svgs/blueclock.svg' width='20px' height='20px' />
-                            <p>{currentTask ? `${currentTask.start} - ${currentTask.stop}` : '08:00am - 09:00am'}</p>
+                            <p>{currentTask?.start ? `${currentTask.start} - ${currentTask.stop}` : '08:00am - 09:00am'}</p>
                         </Time>
 
                     </>

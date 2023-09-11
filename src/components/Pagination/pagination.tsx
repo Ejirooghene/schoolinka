@@ -87,11 +87,42 @@ const Pagination: FC<PaginationProps> = ({ start, stop, setStart, setStop }) => 
                 <img src='svgs/previous.svg' width='20px' height='20px' />
                 <p>Previous</p>
             </Btn>
-            <main>
+            {/* <main>
                 {Array.from({ length: totalPages }, (_, index) => index + 1).map((num: any, index: number) => (
                     <PageBtn key={index.toString()} focused={focused === index} onClick={() => move(index)}>{num}</PageBtn>
                 ))}
-            </main>
+            </main> */}
+            <main>
+  {Array.from({ length: totalPages }, (_, index) => {
+    const page = index + 1;
+    const pagesToShow = 5; // Number of pages to show
+
+    // Calculate the range of pages to display, centered around the focused page
+    const startPage = Math.max(1, focused - Math.floor(pagesToShow / 2));
+    const endPage = Math.min(totalPages, startPage + pagesToShow - 1);
+
+    // Display the page number only if it's within the calculated range
+    if (page >= startPage && page <= endPage) {
+      return (
+        <PageBtn
+          key={index.toString()}
+          focused={focused === index}
+          onClick={() => move(index)}
+        >
+          {page}
+        </PageBtn>
+      );
+    }
+
+    // If the page is outside the range, display ellipsis
+    if (page === startPage - 1 || page === endPage + 1) {
+      return <span key={index.toString()}>...</span>;
+    }
+
+    return null; // Hide pages outside the range and ellipsis
+  })}
+</main>
+
             <Btn onClick={() => next()}>
                 <p>Next</p>
                 <img src='svgs/next.svg' width='20px' height='20px' />

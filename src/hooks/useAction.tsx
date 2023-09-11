@@ -1,6 +1,7 @@
 import React, { FC, createContext, useContext } from 'react';
 import { useTask } from './useTask';
 import { useModal } from './useModal';
+import { getToday } from '../utils/date';
 
 type ParentProps = {
     children: React.ReactNode;
@@ -89,22 +90,22 @@ const Parent: FC<ParentProps> = ({ children }) => {
     }
 
     const rightBtnHandler = (action: string) => {
-        if(currentTask){
-            if(action === 'editTask'){
-                actionHandler(action);
-                setShowEditTask(false);
-            } else if(action === 'addTask'){
-                actionHandler(action);
-                setShowAddTask(false);
-            } else {
-                setShowEditTask(true);
+        if(action === 'editTask'){
+            actionHandler(action);
+            setShowEditTask(false);
+        } else if(action === 'addTask'){
+            actionHandler(action);
+            setShowAddTask (false);
+        } else {
+            setShowEditTask(true);
+            if (currentTask){
                 setValue(currentTask.title);
                 setDate(currentTask.date);
                 setStart(currentTask.start);
                 setStop(currentTask.stop);
-                setShowDeleteTask(false);
-                return;
             }
+            setShowDeleteTask(false);
+            return;
         }
         setStrikeReminder(false);
         setValue('');

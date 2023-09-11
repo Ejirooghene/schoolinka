@@ -16,15 +16,7 @@ export const Container = styled.div`
     z-index: 2;
 
     & .date {
-        width: 100%;
-        height: 100%;
-        background-color: #fff;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: 10px;
+        display: none;
     }
 
     @media (min-width: 768px){
@@ -33,6 +25,18 @@ export const Container = styled.div`
         position: relative;
         border: 1px solid #F2F4F7;
         box-shadow: 0px 8px 8px -4px rgba(16, 24, 40, 0.03), 0px 20px 24px -4px rgba(16, 24, 40, 0.08);
+
+        & .date {
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 10px;
+        }
     }
 `
 

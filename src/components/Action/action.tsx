@@ -31,6 +31,7 @@ const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit, action }) => {
             >
                 <DateCalendar 
                 disablePast
+                className='dateTime'
                 onChange={(val: any) => {
                     setDate(`${val.$y}/${val.$M + 1}/${val.$D}`);
                     setVisible(false);
@@ -44,6 +45,7 @@ const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit, action }) => {
                 <TimeClock 
                 disablePast
                 ampmInClock
+                className='dateTime'
                 onChange={(val: any, status: any) => {
                     setStart(`${String(val.$H).padStart(2, '0')}:${String(val.$m).padStart(2, '0')}`);
                     if (status === 'finish') {
@@ -59,6 +61,7 @@ const Action: FC<ActionProps> = ({ title, btnTxt1, btnTxt2, edit, action }) => {
             >
                 <TimeClock 
                 ampmInClock
+                className='dateTime'
                 onChange={(val: any, status: any) => {
                     setStop(`${String(val.$H).padStart(2, '0')}:${String(val.$m).padStart(2, '0')}`);
                     if (status === 'finish') {

@@ -67,7 +67,7 @@ export const Tasks = styled.section`
     }
 
     @media (min-width: 768px) {
-        overflow-y: visible;
+        overflow: visible;
     }
 `
 export const Task = styled.div<TaskProps>` 

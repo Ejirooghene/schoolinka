@@ -27,6 +27,7 @@ export const Container = styled.div`
         box-shadow: 0px 8px 8px -4px rgba(16, 24, 40, 0.03), 0px 20px 24px -4px rgba(16, 24, 40, 0.08);
 
         & .date {
+            display: block;
             width: 100%;
             height: 100%;
             background-color: #fff;

@@ -8,12 +8,12 @@ const Calendar: FC = () => {
     const containerRef = useRef<HTMLDivElement | null>(null); 
     const [x, setX] = useState(null);
 
-    window.onload = () => {
+    useLayoutEffect(() => {
         if (dateRef.current && containerRef.current) {
             const rect = dateRef.current.getBoundingClientRect();
             containerRef.current.scrollLeft = rect.left - 26;
         }
-    };
+    }, []);
     
     return (
         <Container> 
